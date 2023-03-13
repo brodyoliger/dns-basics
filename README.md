@@ -39,7 +39,7 @@ Within the Active Directory DNS Manager, I opened the Domain Controllers Forward
 <img src="https://i.imgur.com/TFK4FEY.png" height="60%" width="60%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-The first example was mapping an A-record, "mainframe" (mainframe.mydomain.com) to the IP address 1.2.0.4(The IP address of the Domain Controller).
+The first example was mapping an A-record, "mainframe" (mainframe.mydomain.com) to the IP address 1.2.0.4 (The IP address of the Domain Controller).
 </p>
 <br />
 
