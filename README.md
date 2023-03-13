@@ -9,69 +9,60 @@ In this explanation an Azure Virtual Machine running Microsoft Active Directory 
 
 <h2>Environments and Technologies Used</h2>
 
-- Microsoft Azure (Virtual Machines/Compute)
+- Microsoft Azure (Windows Virtual Machine)
 - Remote Desktop
-- Various Command-Line Tools
-- Various Network Protocols
-- Wireshark (Protocol Analyzer)
+- Active Directory DNS Manager
+- Command line tools
 
 <h2>Operating Systems Used </h2>
 
 - Windows 10 (21H2)
-- Ubuntu Server 20.04
 
 <h2>High-Level Steps</h2>
 
-- Created the environments for the traffic to be examined in
-- Downloaded network traffic viewing software within Virtual Machine
-- Began triggering traffic over different network protocols and filtering to see each protocol
+- Created the environment for Active Directory to run in
+- Opened DNS Manager in Active Directory
+- Configured A-records and CNAME records
+- Observed the changes caused by these configurations
 
 <h2>Actions and Observations</h2>
 
 <p>
-<img src="https://i.imgur.com/Og23TWf.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/JzbpABX.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-The first step was to create the environments to begin the network traffic inspection, in this case it was a Windows 10 Virtual machine and a Linux Ubuntu Virtual Server.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/rq532Sx.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Downloaded and installed WireShark and then began inspecting the traffic created by a simple ping command in Windows PowerShell to the Linux Ubuntu server and filtering for ICMP traffic sent and received from the ping command.
+Within the Active Directory DNS Manager, I opened the Domain Controllers Forward Lookup Zones to begin customizing records.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DQgGU0y.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/TFK4FEY.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-I then went into the Windows Virtual machines Network Security Group within Azure (Network Security Groups have a similar function to firewalls) and created a rule to deny inbound and outbound ICMP traffic.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/zhxEEAc.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Upon creation of the traffic denial rule it was clearly shown in PowerShell as well as WireShark that the Virtual Machine could no longer communicate via ICMP. Deleting the NSG rule allowed the Virtual Machine to again communicate to the Ubuntu server via ICMP.
+The first example was mapping an A-record, "mainframe" (mainframe.mydomain.com) to the IP address 1.2.0.4(The IP address of the Domain Controller).
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/FDkGNEv.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/kkFByWJ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-I then filtered for SSH (port 22) and began establishing an SSH connection to the Ubuntu server, immediately the SSH traffic was shown upon contacting the Ubuntu server to initiate a connection.
+Upon pinging "mainframe" it showed us that it pinged the IP address of the Domain Controller, the address that the A-record had been set to.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/eqcMXdj.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/RMnn8Uw.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-I then filtered for DHCP traffic and renewed the Virtual Machines IP address via a PowerShell command. In doing this I was able to see the request as well as the acknowledgement of the IP address renewal between the Virtual Machine and the DHCP server.
+The next to be configured was the CNAME. For this example I chose "search" to route to "www.google.com".
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/XG5tyMU.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Upon pinging "search" in the command line it was clear that the ping was rerouted to "www.google.com".
 </p>
 <br />
