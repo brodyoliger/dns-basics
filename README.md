@@ -2,7 +2,7 @@
 <img src="https://i.imgur.com/pgYpTCl.png" alt="Traffic Examination"/>
 </p>
 
-<h1Basic configuration of A-records and CNAME records</h1>
+<h1>Basic configuration of A-records and CNAME records</h1>
 In this explanation an Azure Virtual Machine running Microsoft Active Directory will be used to configure A-records and CNAME records and observe the changes. <br />
 
 
@@ -36,7 +36,7 @@ Within the Active Directory DNS Manager, I opened the Domain Controllers Forward
 <br />
 
 <p>
-<img src="https://i.imgur.com/TFK4FEY.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/TFK4FEY.png" height="60%" width="60%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 The first example was mapping an A-record, "mainframe" (mainframe.mydomain.com) to the IP address 1.2.0.4(The IP address of the Domain Controller).
@@ -52,7 +52,7 @@ Upon pinging "mainframe" it showed us that it pinged the IP address of the Domai
 <br />
 
 <p>
-<img src="https://i.imgur.com/RMnn8Uw.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/RMnn8Uw.png" height="60%" width="60%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 The next to be configured was the CNAME. For this example I chose "search" to route to "www.google.com".
@@ -60,7 +60,7 @@ The next to be configured was the CNAME. For this example I chose "search" to ro
 <br />
 
 <p>
-<img src="https://i.imgur.com/XG5tyMU.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/XG5tyMU.png" height="70%" width="70%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 Upon pinging "search" in the command line it was clear that the ping was rerouted to "www.google.com".
